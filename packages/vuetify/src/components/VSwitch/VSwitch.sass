@@ -39,6 +39,34 @@
     height: $switch-inset-track-height
     width: $switch-inset-track-width
 
+.v-switch__track::before
+  $dead-zone: calc((var(--v-selection-control-size) - $switch-thumb-width))
+
+  content: ""
+  position: absolute
+  top: 0
+  //left: calc((var(--v-selection-control-size) - ($switch-thumb-width)) * -.5)
+  // Left offset should be the difference between the ripple boundary and the end of the track
+  //  Which is the difference between the track height and the selection control size divided by 2
+  left:  calc($dead-zone * -.5)
+  right: 0
+  bottom: 0
+
+  //@debug ($switch-track-height - $switch-thumb-width) / 2
+
+  background: red
+  opacity: 0.8
+
+  border-radius: $switch-track-radius
+  height: var(--v-selection-control-size)
+  width: calc($switch-track-width + $dead-zone + ($switch-thumb-width - $switch-track-height) - 2px)
+
+.v-switch--inset .v-switch__track::before
+  background: blue
+  border-radius: $switch-inset-track-border-radius
+  height: var(--v-selection-control-size)
+  width: calc($switch-inset-track-width + var(--v-selection-control-size) * 0.5)
+
 .v-switch__thumb
   align-items: center
   border-radius: $switch-thumb-radius
